@@ -10,9 +10,11 @@
 }
 
 h1{
+    margin: 0;
     height: 53px;
     font-family: $fontBold;
     font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-// não consegui centralizar o h1
