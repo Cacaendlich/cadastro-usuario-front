@@ -1,0 +1,23 @@
+.paginaPublica{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+
+
+    .tituloContainer, h1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 13%;
+        width: 100%;
+        font-size: 30px;
+        margin-bottom: 50px;
+        h1{
+            height: 50px;
+            margin: 0;
+        }
+    }
+}

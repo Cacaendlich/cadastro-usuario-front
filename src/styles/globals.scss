@@ -1,16 +1,20 @@
 @import 'variaveis.scss';
 
-*, html, body, #__next{
-    width: 100%;
-    height: 100%;
-    margin: 0;
+*{
     font-family: $fontRegular;
     font-size: 14px;
-    background-color: #F0E7ED;
+}
+
+html, body, #__next{
+//     width: 100%;
+    height: 100%;
+    margin: 0;
+//     background-color: #F0E7ED;
 }
 
 
 @import '../public/fonts/fonts.scss';
 @import '../components/botao/botao.scss';
-@import '../pages/cadastro/cadastro.scss';
-@import '../components/inputPublico/inputPublico.scss';
+@import './paginaPublica.scss'
+// @import '../pages/cadastro/cadastro.scss';
+// @import '../components/inputPublico/inputPublico.scss';
