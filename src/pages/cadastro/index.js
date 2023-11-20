@@ -10,22 +10,23 @@ export default function Cadastro() {
 }
 
 function CadastroCard() {
-  const [nome, setNome] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
     <>
       <section className="paginaCadastro paginaPublica">
+      <div className="circuloSombra"></div>
           <div className="tituloContainer">
             <h1>Sign up</h1>
           </div>
           <div className="conteudoPaginaPublica">
             <form>
               <InputPublico
-                placeholder={'Nome'}
+                placeholder={'name'}
                 tipo={'text'}
-                aoAlterarValorInput={evento => setNome(evento.target.value)}
-                valorInput={nome}
+                aoAlterarValorInput={evento => setName(evento.target.value)}
+                valorInput={name}
               />
               <InputPublico
                 placeholder={'Email'}
