@@ -1,30 +1,33 @@
 @mixin botaoPrimario{
     background-color: $corPrimaria;
+    font-family: $fontBold;
     color: $corBranca;
 }
 
 @mixin botaoPrimarioUpsideDown{
     background-color: $corPrimaria2;
+    font-family: $fontBold;
     color: $corBranca;
 }
 
 @mixin botaoSecundario{
     background-color: $corSecundaria;
+    font-family: $fontRegular;
     color: $corBranca;
 }
 
 @mixin botaoSecundarioUpsideDown{
     background-color: $corSecundaria2;
+    font-family: $fontRegular;
     color: $corBranca;
 }
 
 .btn{
     width: 100%;
-    height: 63px;
+    height: 50px;
+    margin-bottom: 8px;
     border: none;
     border-radius: 30px;
-    font-family: $fontRegular;
-    font-size: 18px;
     cursor: pointer;
 
     &.primaria{
