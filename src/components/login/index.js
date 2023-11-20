@@ -11,11 +11,12 @@ export default function Login() {
       <section className="paginaCadastro paginaPublica">
       <div className="circuloSombra"></div>
           <div className="tituloContainer">
-            <h1>LOG IN</h1>
+            <h1>LOGIN</h1>
           </div>
           <div className="conteudoPaginaPublica">
             <form>
               <InputPublico
+                className="primeiroElemento"
                 placeholder={'Email'}
                 tipo={'email'}
                 aoAlterarValorInput={evento => setEmail(evento.target.value)}
@@ -29,7 +30,7 @@ export default function Login() {
               />
               <Botao
                 tipo="submit"
-                texto={'LOG IN'}
+                texto={'LOGIN'}
                 manipularClick={() => console.log('clicou Cadastrar')}
                 desabilitado={false}
               />
