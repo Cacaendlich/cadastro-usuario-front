@@ -21,20 +21,37 @@
 
     .conteudoPaginaPublica{
         width: 80%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 30%;
+
+        form {
+            width: 100%;
+        }
+
+        .primeiroElemento {
+            position: absolute;
+            top: 20px;
+        }
     }
 
     .tituloContainer, h1{
         display: flex;
         align-items: center;
         justify-content: center;
-        position: relative;
+        position: fixed;
+        top: 0;
         height: 13%;
         width: 100%;
         font-size: 36px;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
+        z-index: 1;
         h1{
             height: 50px;
-            margin: 0;
+            margin: 100px 0;
             color: $corPrimaria;
         }
     }
@@ -48,5 +65,19 @@
             height: 593px;
         }
 
+        .tituloContainer, h1{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 13%;
+            width: 100%;
+            font-size: 36px;
+            margin-bottom: 50px;
+        }
+
+        .conteudoPaginaPublica{
+            height: 50%;
+        }
     }
 }
