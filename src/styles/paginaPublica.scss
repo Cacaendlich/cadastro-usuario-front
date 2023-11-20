@@ -35,6 +35,18 @@
         h1{
             height: 50px;
             margin: 0;
+            color: $corPrimaria;
         }
+    }
+
+    @media screen and (min-width:$desktopBreakpoint) {
+        flex-direction: row;
+        padding: 0 150px;
+
+        .circuloSombra{
+            width: 600px;
+            height: 593px;
+        }
+
     }
 }

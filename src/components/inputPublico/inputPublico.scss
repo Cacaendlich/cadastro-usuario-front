@@ -21,7 +21,18 @@
             margin-bottom: 20px;
             
             &::placeholder{
-            color: $corPrimaria;
+                /* chrome, opera, safari e firefox*/
+                color: $corPrimaria;
+            }
+
+            &:-ms-input-placeholder{
+                /*ie 10-11*/
+                color: $corPrimaria;
+            }
+
+            &::-ms-input-placeholder {
+                /*edge*/
+                color: $corPrimaria;
             }
         }
     }
