@@ -23,6 +23,7 @@ function CadastroCard() {
           <div className="conteudoPaginaPublica">
             <form>
               <InputPublico
+                className="primeiroElemento"
                 placeholder={'name'}
                 tipo={'text'}
                 aoAlterarValorInput={evento => setName(evento.target.value)}
@@ -48,7 +49,7 @@ function CadastroCard() {
               />
               <Link href='/'>
               <Botao
-                texto={'Log in'}
+                texto={'Login'}
                 cor="secundario"
                 manipularClick={() => console.log('clicou Cadastro')}
               />
