@@ -3,14 +3,7 @@ import Botao from "@/src/components/botao";
 import InputPublico from "@/src/components/inputPublico";
 import Link from "next/link";
 
-export default function Cadastro() {
-  return (
-   <CadastroCard />  
-  );
-}
-
-function CadastroCard() {
-  const [name, setName] = useState('');
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
@@ -18,16 +11,10 @@ function CadastroCard() {
       <section className="paginaCadastro paginaPublica">
       <div className="circuloSombra"></div>
           <div className="tituloContainer">
-            <h1>SIGN IN</h1>
+            <h1>LOG IN</h1>
           </div>
           <div className="conteudoPaginaPublica">
             <form>
-              <InputPublico
-                placeholder={'name'}
-                tipo={'text'}
-                aoAlterarValorInput={evento => setName(evento.target.value)}
-                valorInput={name}
-              />
               <InputPublico
                 placeholder={'Email'}
                 tipo={'email'}
@@ -42,13 +29,13 @@ function CadastroCard() {
               />
               <Botao
                 tipo="submit"
-                texto={'SIGN UP'}
+                texto={'LOG IN'}
                 manipularClick={() => console.log('clicou Cadastrar')}
                 desabilitado={false}
               />
-              <Link href='/'>
+              <Link href='/cadastro'>
               <Botao
-                texto={'Log in'}
+                texto={'Sign up'}
                 cor="secundario"
                 manipularClick={() => console.log('clicou Cadastro')}
               />
