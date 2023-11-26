@@ -28,8 +28,8 @@ export default function Login() {
     setEstaSubmetendo(true);
 
     try {
-      const usuarioCadastrado = await usuarioService.cadastro({
-        email: email,
+      const usuarioCadastrado = await usuarioService.login({
+        login: email,
         senha: senha
       });
       alert("Sucesso!"); 
