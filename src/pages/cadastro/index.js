@@ -1,11 +1,12 @@
 import { useState } from "react";
-
 import Botao from "@/src/components/botao";
 import InputPublico from "@/src/components/inputPublico";
-
 import { validarNome, validarEmail, validarSenha, validarConfirmarSenha } from "@/src/utils/validadores";
-
 import Link from "next/link";
+import UsuarioService from "@/services/UsuarioService";
+
+
+const usuarioService = new UsuarioService();
 
 export default function Cadastro() {
   return (
@@ -18,14 +19,39 @@ function CadastroCard() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [estaSubmetendo, setEstaSubmetendo] = useState(false);
 
-  const validarFormulario = () =>{
+  const validarFormulario = () => {
     return (
       validarNome(nome)
       && validarEmail(email)
       && validarSenha(senha)
       && validarConfirmarSenha(senha, confirmarSenha)
     );
+  }
+
+  const enviarDadosCadastroUsuario = async (event) => {
+    event.preventDefault()
+    if(!validarFormulario){
+      return;
+    }
+
+    setEstaSubmetendo(true);
+
+    try {
+      const usuarioCadastrado = await usuarioService.cadastro({
+        nome: nome,
+        email: email,
+        senha: senha
+      });
+    } catch (error) {
+      alert(
+        "Erro ao tentar fazer login. " + error?.response?.data?.error
+      );
+    }
+
+    setEstaSubmetendo(false);
+
   }
 
   return (
@@ -36,7 +62,7 @@ function CadastroCard() {
             <h1>SIGN IN</h1>
           </div>
           <div className="conteudoPaginaPublica">
-            <form>
+            <form onSubmit={enviarDadosCadastroUsuario}>
               <InputPublico
                 className="primeiroElemento"
                 placeholder={'nome'}
@@ -48,7 +74,7 @@ function CadastroCard() {
               />
 
               <InputPublico
-                placeholder={'Email'}
+                placeholder={'email'}
                 tipo={'email'}
                 aoAlterarValorInput={evento => setEmail(evento.target.value)}
                 valorInput={email}
@@ -77,15 +103,13 @@ function CadastroCard() {
               <Botao
                 tipo="submit"
                 texto={'SIGN UP'}
-                manipularClick={() => console.log('clicou Cadastrar')}
-                desabilitado={!validarFormulario()}
+                desabilitado={!validarFormulario() || estaSubmetendo}
               />
 
               <Link href='/'>
               <Botao
                 texto={'Login'}
                 cor="secundario"
-                manipularClick={() => console.log('clicou Cadastro')}
               />
             </Link>
             </form>
