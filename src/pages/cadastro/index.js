@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Botao from "@/src/components/botao";
 import InputPublico from "@/src/components/inputPublico";
+import { validarNome, validarEmail, validarSenha, validarConfirmarSenha } from "@/src/utils/validadores";
 import Link from "next/link";
+import UsuarioService from "@/services/UsuarioService";
+
+
+const usuarioService = new UsuarioService();
 
 export default function Cadastro() {
   return (
@@ -10,9 +15,46 @@ export default function Cadastro() {
 }
 
 function CadastroCard() {
-  const [name, setName] = useState('');
+  const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [estaSubmetendo, setEstaSubmetendo] = useState(false);
+
+  const validarFormulario = () => {
+    return (
+      validarNome(nome)
+      && validarEmail(email)
+      && validarSenha(senha)
+      && validarConfirmarSenha(senha, confirmarSenha)
+    );
+  }
+
+  const enviarDadosCadastroUsuario = async (event) => {
+    event.preventDefault()
+    if(!validarFormulario){
+      return;
+    }
+
+    setEstaSubmetendo(true);
+
+    try {
+      const usuarioCadastrado = await usuarioService.cadastro({
+        nome: nome,
+        email: email,
+        senha: senha
+      });
+      alert("Sucesso!"); 
+    } catch (error) {
+      alert(
+        "Erro ao tentar cadastrar: " + error?.response?.data?.error
+      );
+    }
+
+    setEstaSubmetendo(false);
+
+  }
+
   return (
     <>
       <section className="paginaCadastro paginaPublica">
@@ -21,37 +63,54 @@ function CadastroCard() {
             <h1>SIGN IN</h1>
           </div>
           <div className="conteudoPaginaPublica">
-            <form>
+            <form onSubmit={enviarDadosCadastroUsuario}>
               <InputPublico
                 className="primeiroElemento"
-                placeholder={'name'}
+                placeholder={'nome'}
                 tipo={'text'}
-                aoAlterarValorInput={evento => setName(evento.target.value)}
-                valorInput={name}
+                aoAlterarValorInput={evento => setNome(evento.target.value)}
+                valorInput={nome}
+                mensagemValidacao={'O nome deve conter pelo menos 3 caracteres.'}
+                exibirMensagemValidacao = {nome && !validarNome(nome)}
               />
+
               <InputPublico
-                placeholder={'Email'}
+                placeholder={'email'}
                 tipo={'email'}
                 aoAlterarValorInput={evento => setEmail(evento.target.value)}
                 valorInput={email}
+                mensagemValidacao="Por favor, insira um email válido."
+                exibirMensagemValidacao = {email && !validarEmail(email)}
               />
+
               <InputPublico
                 tipo={'password'}
-                placeholder={'Password'}
-                aoAlterarValorInput={evento => setPassword(evento.target.value)}
-                valorInput={password}
+                placeholder={'senha'}
+                aoAlterarValorInput={evento => setSenha(evento.target.value)}
+                valorInput={senha}
+                mensagemValidacao='A senha deve conter pelo menos 4 caracteres.'
+                exibirMensagemValidacao = {senha && !validarSenha(senha)}
               />
+
+              <InputPublico
+                tipo={'password'}
+                placeholder={'Confirm senha'}
+                aoAlterarValorInput={evento => setConfirmarSenha(evento.target.value)}
+                valorInput={confirmarSenha}
+                mensagemValidacao='As senhas não coincidem.'
+                exibirMensagemValidacao = {senha && !validarConfirmarSenha(senha, confirmarSenha)}
+              />
+
               <Botao
                 tipo="submit"
                 texto={'SIGN UP'}
-                manipularClick={() => console.log('clicou Cadastrar')}
-                desabilitado={false}
+                desabilitado={!validarFormulario() || estaSubmetendo}
               />
+
               <Link href='/'>
               <Botao
                 texto={'Login'}
                 cor="secundario"
-                manipularClick={() => console.log('clicou Cadastro')}
               />
             </Link>
             </form>

@@ -1,11 +1,47 @@
 import { useState } from "react";
 import Botao from "@/src/components/botao";
 import InputPublico from "@/src/components/inputPublico";
+import { validarEmail, validarSenha } from "@/src/utils/validadores";
 import Link from "next/link";
+import UsuarioService from "@/services/UsuarioService";
+
+const usuarioService = new UsuarioService();
 
 export default function Login() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
+  const [estaSubmetendo, setEstaSubmetendo] = useState(false);
+
+  const validarFormulario = () =>{
+    return (
+      validarEmail(email)
+      && validarSenha(senha)
+    );
+  }
+
+  const enviarDadosLoginUsuario = async (event) => {
+    event.preventDefault()
+    if(!validarFormulario){
+      return;
+    }
+
+    setEstaSubmetendo(true);
+
+    try {
+      const usuarioCadastrado = await usuarioService.cadastro({
+        email: email,
+        senha: senha
+      });
+      alert("Sucesso!"); 
+    } catch (error) {
+      alert(
+        "Erro ao tentar fazer login: " + error?.response?.data?.error
+      );
+    }
+
+    setEstaSubmetendo(false);
+
+  }
   return (
     <>
       <section className="paginaCadastro paginaPublica">
@@ -14,31 +50,33 @@ export default function Login() {
             <h1>LOGIN</h1>
           </div>
           <div className="conteudoPaginaPublica">
-            <form>
+            <form onSubmit={enviarDadosLoginUsuario}>
               <InputPublico
                 className="primeiroElemento"
                 placeholder={'Email'}
                 tipo={'email'}
                 aoAlterarValorInput={evento => setEmail(evento.target.value)}
                 valorInput={email}
+                mensagemValidacao="Por favor, insira um email válido."
+                exibirMensagemValidacao = {email && !validarEmail(email)}
               />
               <InputPublico
                 tipo={'password'}
-                placeholder={'Password'}
-                aoAlterarValorInput={evento => setPassword(evento.target.value)}
-                valorInput={password}
+                placeholder={'senha'}
+                aoAlterarValorInput={evento => setSenha(evento.target.value)}
+                valorInput={senha}
+                mensagemValidacao='A senha deve conter pelo menos 4 caracteres.'
+                exibirMensagemValidacao = {senha && !validarSenha(senha)}
               />
               <Botao
                 tipo="submit"
                 texto={'LOGIN'}
-                manipularClick={() => console.log('clicou Cadastrar')}
-                desabilitado={false}
+                desabilitado={!validarFormulario() || estaSubmetendo}
               />
               <Link href='/cadastro'>
               <Botao
                 texto={'Sign up'}
                 cor="secundario"
-                manipularClick={() => console.log('clicou Cadastro')}
               />
             </Link>
             </form>
