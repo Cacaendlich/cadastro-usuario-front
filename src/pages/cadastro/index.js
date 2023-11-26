@@ -44,9 +44,10 @@ function CadastroCard() {
         email: email,
         senha: senha
       });
+      alert("Sucesso!"); 
     } catch (error) {
       alert(
-        "Erro ao tentar fazer login. " + error?.response?.data?.error
+        "Erro ao tentar cadastrar: " + error?.response?.data?.error
       );
     }
 
