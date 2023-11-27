@@ -62,7 +62,7 @@ export default function Login() {
               />
               <InputPublico
                 tipo={'password'}
-                placeholder={'senha'}
+                placeholder={'Password'}
                 aoAlterarValorInput={evento => setSenha(evento.target.value)}
                 valorInput={senha}
                 mensagemValidacao='A senha deve conter pelo menos 4 caracteres.'

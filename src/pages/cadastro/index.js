@@ -62,11 +62,11 @@ function CadastroCard() {
           <div className="tituloContainer">
             <h1>SIGN IN</h1>
           </div>
-          <div className="conteudoPaginaPublica">
+          <div className="conteudoPaginaPublica paginaCadastro">
             <form onSubmit={enviarDadosCadastroUsuario}>
               <InputPublico
                 className="primeiroElemento"
-                placeholder={'nome'}
+                placeholder={'Name'}
                 tipo={'text'}
                 aoAlterarValorInput={evento => setNome(evento.target.value)}
                 valorInput={nome}
@@ -75,7 +75,7 @@ function CadastroCard() {
               />
 
               <InputPublico
-                placeholder={'email'}
+                placeholder={'Email'}
                 tipo={'email'}
                 aoAlterarValorInput={evento => setEmail(evento.target.value)}
                 valorInput={email}
@@ -85,7 +85,7 @@ function CadastroCard() {
 
               <InputPublico
                 tipo={'password'}
-                placeholder={'senha'}
+                placeholder={'Password'}
                 aoAlterarValorInput={evento => setSenha(evento.target.value)}
                 valorInput={senha}
                 mensagemValidacao='A senha deve conter pelo menos 4 caracteres.'
@@ -94,7 +94,7 @@ function CadastroCard() {
 
               <InputPublico
                 tipo={'password'}
-                placeholder={'Confirm senha'}
+                placeholder={'Confirm password'}
                 aoAlterarValorInput={evento => setConfirmarSenha(evento.target.value)}
                 valorInput={confirmarSenha}
                 mensagemValidacao='As senhas não coincidem.'

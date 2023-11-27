@@ -1,0 +1,9 @@
+.paginaPublica{
+    @media screen and (min-width:$desktopBreakpoint) {
+        .paginaCadastro{
+            height: 68%;
+            flex: 1;
+    
+        }
+    }
+}
