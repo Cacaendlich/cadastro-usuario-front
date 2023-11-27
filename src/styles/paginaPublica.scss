@@ -7,18 +7,6 @@
     justify-content: center;
     position: relative;
 
-    .circuloSombra {
-        position: absolute;
-        content: '';
-        width: 600px;
-        height: 700px;
-        background-color: rgba(255, 255, 255, 0.16);
-        border-radius: 100%;
-        pointer-events: none; /* Isso permite que os cliques passem pela meia lua para os elementos abaixo */
-        margin-right: 90%;
-    }
-    
-
     .conteudoPaginaPublica{
         width: 80%;
         position: relative;
@@ -66,11 +54,6 @@
     @media screen and (min-width:$desktopBreakpoint) {
         flex-direction: row;
         padding: 0 150px;
-
-        .circuloSombra{
-            width: 600px;
-            height: 593px;
-        }
 
         .tituloContainer, h1{
             display: flex;
